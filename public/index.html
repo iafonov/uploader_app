@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cosmonaut</title>
+
+    <script src="js/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="js/vendor/underscore.min.js" type="text/javascript"></script>
+
+    <script src="js/files_list.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script type="text/template" id="file-item-template">
+      <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td><a href="{{url}}">Download</a></td>
+      </tr>
+    </script>
+
+    <script type="text/javascript">
+      _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+      };
+    </script>
+
+    <style type="text/css">
+      body { padding-top: 10px; }
+      .hidden { display: none; }
+      .progress-bar { padding-left: 20px; padding-bottom: 20px; background: url('images/progress.gif') no-repeat; height: 16px }
+      .hero-unit { padding-left: 10px; padding-bottom: 20px; }
+    </style>
+  </head>
+
+  <body>
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">Cosmonaut 0.0.1</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#files-list">Files list</a></li>
+            <li><a href="#upload-file">Upload file</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-unit row">
+        <div class="span2">
+          <a href="http://en.wikipedia.org/wiki/Yuri_Gagarin"><img src="images/cosmonaut.png" /></a>
+        </div>
+
+        <div class="span8">
+          <h1>Поехали!</h1>
+          <p>Fast &amp; simple custom built web-server</p>  
+        </div>
+      </div>
+
+      <section id="files-list">
+        <div class="page-header">
+          <h1>Files list <small>listing all uploaded files</small></h1>
+        </div>
+        <div class="row">
+          <div class="span12">
+            <div id="progress_bar" class="progress-bar"></div>
+            <table id="files_list" class="condensed-table zebra-striped hidden">
+              <tr class="header">
+                <th>File</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="upload-file">
+        <div class="page-header">
+          <h1>Upload file <small>size is limited to 20 megabytes</small></h1>
+        </div>
+        <div class="row">
+          <form action="upload" method="post" enctype="multipart/form-data">
+            <fieldset>
+              <div class="clearfix">
+                <label for="file">File:</label>
+                <div class="input">
+                  <input class="input-file" id="file_input" name="file" type="file" />
+                </div>
+              </div>
+              <div class="clearfix">
+                <label for="textarea">Description</label>
+                <div class="input">
+                  <textarea class="xxlarge" id="description" name="description" rows="4"></textarea>
+                  <span class="help-block">
+                    You can input some text to describe uploaded file
+                  </span>
+                </div>
+              </div>
+              <div class="actions">
+                <input type="submit" class="btn primary" value="Upload">
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <p>&copy; <a href="http://iafonov.github.com/">Igor Afonov</a> / <a href="https://github.com/iafonov/cosmonaut">GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
