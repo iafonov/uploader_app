@@ -5,8 +5,11 @@
 
     <script src="js/vendor/jquery.min.js" type="text/javascript"></script>
     <script src="js/vendor/underscore.min.js" type="text/javascript"></script>
+    <script src="js/vendor/jquery.ui.widget.js"></script>
+    <script src="js/vendor/jquery.iframe-transport.js"></script>
+    <script src="js/vendor/jquery.fileupload.js"></script>
 
-    <script src="js/files_list.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -81,7 +84,7 @@
           <h1>Upload file <small>size is limited to 20 megabytes</small></h1>
         </div>
         <div class="row">
-          <form action="upload" method="post" enctype="multipart/form-data">
+          <form id="file_upload" action="upload" method="post" enctype="multipart/form-data">
             <fieldset>
               <div class="clearfix">
                 <label for="file">File:</label>
@@ -92,14 +95,15 @@
               <div class="clearfix">
                 <label for="textarea">Description</label>
                 <div class="input">
-                  <textarea class="xxlarge" id="description" name="description" rows="4"></textarea>
-                  <span class="help-block">
+                  <textarea class="xxlarge active-comment" id="file_description" name="description" rows="4"></textarea>
+                  <span class="help-block active-comment">
                     You can input some text to describe uploaded file
                   </span>
+                  <div class="span6 passive-comment" style="padding-top: 6px; font-size: 13px; line-height: 18px" id="file_description_text"></span>
                 </div>
               </div>
               <div class="actions">
-                <input type="submit" class="btn primary" value="Upload">
+                <input type="submit" class="btn primary" value="Save" id="upload_submit">
               </div>
             </fieldset>
           </form>
