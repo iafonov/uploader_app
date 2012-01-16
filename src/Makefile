@@ -1,6 +1,9 @@
-OBJ = util.o         \
-			uploader_app.o \
-			uploads_list.o \
+OBJ = uploader_app.o             \
+			data_access/util.o         \
+			data_access/uploads_list.o \
+			actions/upload.o           \
+			actions/status.o           \
+			actions/files.o            \
 
 OPTIMIZATION?=-O0
 CFLAGS?=$(OPTIMIZATION) -Wall $(ARCH) $(PROF)

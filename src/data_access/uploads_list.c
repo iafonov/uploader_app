@@ -3,7 +3,7 @@
 #include <dirent.h>
 #include <json/json.h>
 
-#include "log.h"
+#include "../log.h"
 #include "util.h"
 #include "uploads_list.h"
 
