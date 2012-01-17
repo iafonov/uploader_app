@@ -16,7 +16,7 @@
     <script type="text/template" id="file-item-template">
       <tr>
         <td>{{name}}</td>
-        <td>{{description}}</td>
+        <td>{{size}}</td>
         <td><a href="{{url}}">Download</a></td>
       </tr>
     </script>
@@ -89,21 +89,9 @@
               <div class="clearfix">
                 <label for="file">File:</label>
                 <div class="input">
-                  <input class="input-file" id="file_input" name="file" type="file" /><div id="upload_progress"></div>
+                  <input class="input-file" id="file_input" name="file" type="file" />
+                  <span id="upload_progress"></span>
                 </div>
-              </div>
-              <div class="clearfix">
-                <label for="textarea">Description</label>
-                <div class="input">
-                  <textarea class="xxlarge active-comment" id="file_description" name="description" rows="4"></textarea>
-                  <span class="help-block active-comment">
-                    You can input some text to describe uploaded file
-                  </span>
-                  <div class="span6 passive-comment" style="padding-top: 6px; font-size: 13px; line-height: 18px" id="file_description_text"></span>
-                </div>
-              </div>
-              <div class="actions">
-                <input type="submit" class="btn primary" value="Save" id="upload_submit">
               </div>
             </fieldset>
           </form>

@@ -1,13 +1,20 @@
 #include <json/json.h>
 
 #include "status.h"
+#include "../data_access/redis.h"
 
 void action_status(http_request* request, http_response *response) {
+  char *upload_id = params_map_get(request->params, "upload_id")->val;
   json_object* result = json_object_new_object();
+  int uploaded = 0, size = 0;
 
-  info("param: %s", params_map_get(request->params, "upload_id")->val);
+  redis_connection *connection = redis_connection_init();
 
-  json_object_object_add(result, "uploaded", json_object_new_string(request->uid));
+  uploaded = redis_get_int(connection, "GET %s:uploaded", upload_id);
+  size = redis_get_int(connection, "GET %s:size", upload_id);
+
+  json_object_object_add(result, "uploaded", json_object_new_int(uploaded));
+  json_object_object_add(result, "size", json_object_new_int(size));
 
   render_json(response, json_object_to_json_string(result));
 }

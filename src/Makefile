@@ -1,6 +1,7 @@
 OBJ = uploader_app.o             \
 			data_access/util.o         \
 			data_access/uploads_list.o \
+			data_access/redis.o        \
 			actions/upload.o           \
 			actions/status.o           \
 			actions/files.o            \

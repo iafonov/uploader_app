@@ -1,5 +1,3 @@
 # Uploader app
 
-Example web application built with cosmonaut lightweight web server/framework.
-
-See: https://github.com/iafonov/cosmonaut
+Sample web application built with [cosmonaut](https://github.com/iafonov/cosmonaut) lightweight web server/framework.

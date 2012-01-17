@@ -1,13 +1,25 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+
 #include <json/json.h>
 
 #include "upload.h"
+#include "../data_access/redis.h"
 
-static void capture_upload_progress(int content_length, int parsed) {
-  info("%d -> %d", parsed, content_length);
+static void capture_upload_progress(http_request* request, int content_length, int parsed) {
+  redis_connection *connection = (redis_connection*)request->data;
+  char *upload_id = params_map_get(request->params, "upload_id")->val;
+
+  redis_execute(connection, "SET %s:uploaded %d", upload_id, parsed);
+  redis_execute(connection, "EXPIRE %s:uploaded 60", upload_id);
+  redis_execute(connection, "SET %s:size %d", upload_id, content_length);
+  redis_execute(connection, "EXPIRE %s:size 60", upload_id);
 }
 
-void set_upload_progress_hook(http_request* request) {
+void before_upload_filter(http_request* request) {
   request->progress_hook = capture_upload_progress;
+  request->data = redis_connection_init();
 }
 
 void action_upload(http_request* request, http_response *response) {

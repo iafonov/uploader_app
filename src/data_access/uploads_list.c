@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <json/json.h>
 
+#include <sys/stat.h>
 #include "../log.h"
 #include "util.h"
 #include "uploads_list.h"
@@ -18,20 +19,24 @@ void uploads_list_free(uploads_list* l) {
   free(l);
 }
 
-static char* read_description(char *folder_path, char *file_name) {
-  return strdup("DESCRIPTION");
+static int file_size(char *folder_path, char *file_name) {
+  struct stat st;
+  char *path = join_path(folder_path, file_name);
+  stat(path, &st);
+  free(path);
+
+  return st.st_size;
 }
 
 static void fill_json_file_entry(char *path, struct dirent *ep, void *data) {
   json_object* json_file_entry = (json_object*)data;
   char* url = join_path(path + strlen("../public/") , ep->d_name);
-  char* description = read_description(path, ep->d_name);
+  int size = file_size(path, ep->d_name);
 
   json_object_object_add(json_file_entry, "name", json_object_new_string(ep->d_name));
   json_object_object_add(json_file_entry, "url", json_object_new_string(url));
-  json_object_object_add(json_file_entry, "description", json_object_new_string(description));
+  json_object_object_add(json_file_entry, "size", json_object_new_int(size));
 
-  free(description);
   free(url);
 }
 

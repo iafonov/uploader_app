@@ -11,7 +11,7 @@ void action_index(http_request* request, http_response *response) {
 void configure() {
   mount("/", action_index);
 
-  mount("/files/new/(:upload_id)", action_upload)->before_filter = set_upload_progress_hook;
+  mount("/files/new/(:upload_id)", action_upload)->before_filter = before_upload_filter;
   mount("/files/status/(:upload_id)", action_status);
   mount("/files.json", action_list_files);
 }
