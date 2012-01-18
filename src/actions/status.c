@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <json/json.h>
 
 #include "status.h"
