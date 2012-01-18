@@ -67,5 +67,5 @@ const char* uploads_list_to_json(uploads_list *l) {
 
   json_object_put(json_result);
 
-  return json_object_to_json_string(json_result);
+  return result;
 }

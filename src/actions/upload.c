@@ -28,4 +28,7 @@ void action_upload(http_request* request, http_response *response) {
   json_object_object_add(result, "request_uid", json_object_new_string(request->uid));
 
   render_json(response, json_object_to_json_string(result));
+
+  json_object_put(result);
+  redis_connection_free(request->data);
 }

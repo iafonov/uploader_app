@@ -18,4 +18,7 @@ void action_status(http_request* request, http_response *response) {
   json_object_object_add(result, "size", json_object_new_int(size));
 
   render_json(response, json_object_to_json_string(result));
+
+  json_object_put(result);
+  redis_connection_free(connection);
 }
