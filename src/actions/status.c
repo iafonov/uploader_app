@@ -4,9 +4,9 @@
 #include "status.h"
 #include "../data_access/redis.h"
 
-void action_status(http_request* request, http_response *response) {
+void action_status(http_request *request, http_response *response) {
   char *upload_id = params_map_get(request->params, "upload_id")->val;
-  json_object* result = json_object_new_object();
+  json_object *result = json_object_new_object();
   int uploaded = 0, size = 0;
 
   redis_connection *connection = redis_connection_init();

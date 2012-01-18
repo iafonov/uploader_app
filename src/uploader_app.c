@@ -4,7 +4,7 @@
 #include "actions/status.h"
 #include "actions/files.h"
 
-void action_index(http_request* request, http_response *response) {
+void action_index(http_request *request, http_response *response) {
   render_file(response, "index.html");
 }
 

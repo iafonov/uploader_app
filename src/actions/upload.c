@@ -7,7 +7,7 @@
 #include "upload.h"
 #include "../data_access/redis.h"
 
-static void capture_upload_progress(http_request* request, int content_length, int parsed) {
+static void capture_upload_progress(http_request *request, int content_length, int parsed) {
   redis_connection *connection = (redis_connection*)request->data;
   char *upload_id = params_map_get(request->params, "upload_id")->val;
 
@@ -22,8 +22,8 @@ void before_upload_filter(http_request* request) {
   request->data = redis_connection_init();
 }
 
-void action_upload(http_request* request, http_response *response) {
-  json_object* result = json_object_new_object();
+void action_upload(http_request *request, http_response *response) {
+  json_object *result = json_object_new_object();
 
   json_object_object_add(result, "request_uid", json_object_new_string(request->uid));
 

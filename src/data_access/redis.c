@@ -13,24 +13,24 @@ struct redis_connection {
   redisContext *conn;
 };
 
-redis_connection* redis_connection_init() {
-  redis_connection* result = malloc(sizeof(redis_connection));
+redis_connection *redis_connection_init() {
+  redis_connection *result = malloc(sizeof(redis_connection));
 
   result->conn = redisConnectWithTimeout(REDIS_HOST, REDIS_PORT, REDIS_TIMEOUT);
   if (result->conn->err) {
     info("Connection error: %s\n", result->conn->errstr);
     exit(1);
   }
-  
+
   return result;
 }
 
-void redis_connection_free(redis_connection* redis_connection) {
+void redis_connection_free(redis_connection *redis_connection) {
   redisFree(redis_connection->conn);
   free(redis_connection);
 }
 
-void redis_execute(redis_connection* redis_connection, const char *format, ...) {
+void redis_execute(redis_connection *redis_connection, const char *format, ...) {
   va_list ap;
   redisReply *reply;
 
@@ -41,7 +41,7 @@ void redis_execute(redis_connection* redis_connection, const char *format, ...) 
   freeReplyObject(reply);
 }
 
-int redis_get_int(redis_connection* redis_connection, const char *format, ...) {
+int redis_get_int(redis_connection *redis_connection, const char *format, ...) {
   va_list ap;
   redisReply *reply;
   int result = 0;

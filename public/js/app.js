@@ -1,6 +1,6 @@
 function create_size_formatter() {
-  var kb_template = _.template("{{kbytes}}kb");
-  var mb_template = _.template("{{mbytes}}mb");
+  var kb_template = _.template("{{kbytes}}K");
+  var mb_template = _.template("{{mbytes}}M");
 
   return {
     format: function(size) {
@@ -87,15 +87,18 @@ function create_upload_progress_controller() {
   var timer_id, uid;
   var url_template = _.template("/files/status/{{upload_uid}}");
   var file_size_formatter = create_size_formatter();
+  var uploaded_prev;
 
   function format_progress(uploaded, size) {
     var stats = {
       percents: ((uploaded / size) * 100).toFixed(0),
       uploaded_kb: file_size_formatter.format(uploaded),
-      size_kb: file_size_formatter.format(size)
+      size_kb: file_size_formatter.format(size),
+      speed_kb: file_size_formatter.format(uploaded - uploaded_prev)
     }
 
-    return _.template("{{percents}}% ({{uploaded_kb}} of {{size_kb}})", stats);
+    uploaded_prev = uploaded;
+    return _.template("{{percents}}% ({{uploaded_kb}} of {{size_kb}}, {{speed_kb}}/sec)", stats);
   }
 
   function render_progress(data) {
@@ -108,9 +111,10 @@ function create_upload_progress_controller() {
 
   return {
     start: function(upload_uid) {
+      uploaded_prev = 0;
       progress_info.show();
       uid = upload_uid;
-      timer_id = window.setInterval(update_progress, 100);
+      timer_id = window.setInterval(update_progress, 1000);
     },
     stop: function() {
       progress_info.html("Upload complete").delay(1000).fadeOut();

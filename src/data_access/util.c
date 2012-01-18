@@ -24,7 +24,7 @@ void traverse_directory(char *path, on_entry_cb entry_cb, void *data) {
 }
 
 char *join_path(char *str1, char *str2) {
-  char* result = malloc(strlen(str1) + strlen("/") + strlen(str2) + 1);
+  char *result = malloc(strlen(str1) + strlen("/") + strlen(str2) + 1);
   sprintf(result, "%s/%s", str1, str2);
   return result;
 }

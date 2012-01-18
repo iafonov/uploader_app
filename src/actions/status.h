@@ -3,6 +3,6 @@
 
 #include "../uploader_app.h"
 
-void action_status(http_request* request, http_response *response);
+void action_status(http_request *request, http_response *response);
 
 #endif
