@@ -57,13 +57,15 @@ function create_upload_controller() {
     var upload_uid = generate_uid();
     var url = _.template("/files/new/{{upload_uid}}", { upload_uid: upload_uid });
 
-    $('#file_input').fileupload({
-      dataType: 'json',
+    $("#file_input").fileupload({
+      dataType: "json",
       url: url,
       start: function(e, data) {
+        $("#file_input").attr("disabled", true);
         on_upload_start_handler(upload_uid);
       },
       stop: function(e, data) {
+        $("#file_input").removeAttr("disabled");
         on_upload_complete_handler(upload_uid);
       }
     });
@@ -142,3 +144,4 @@ function app() {
 $(function() {
   app().init();
 });
+
