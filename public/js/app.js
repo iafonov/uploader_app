@@ -7,12 +7,12 @@ function create_size_formatter() {
       var converted_data = {
         kbytes: (size / 1024).toFixed(0),
         mbytes: (size / (1024 * 1024)).toFixed(2)
-      }
+      };
 
       return converted_data.mbytes > 1 ?
         mb_template(converted_data) : kb_template(converted_data);
     }
-  }
+  };
 }
 
 function create_list_controller() {
@@ -79,7 +79,7 @@ function create_upload_controller() {
       on_upload_complete_handler = _.compose(on_upload_complete_handler, cb);
       reset_form();
     }
-  }
+  };
 }
 
 function create_upload_progress_controller() {
@@ -95,7 +95,7 @@ function create_upload_progress_controller() {
       uploaded_kb: file_size_formatter.format(uploaded),
       size_kb: file_size_formatter.format(size),
       speed_kb: file_size_formatter.format(uploaded - uploaded_prev)
-    }
+    };
 
     uploaded_prev = uploaded;
     return _.template("{{percents}}% ({{uploaded_kb}} of {{size_kb}}, {{speed_kb}}/sec)", stats);
@@ -120,7 +120,7 @@ function create_upload_progress_controller() {
       progress_info.html("Upload complete").delay(1000).fadeOut();
       window.clearInterval(timer_id);
     }
-  }
+  };
 }
 
 function app() {
@@ -141,4 +141,4 @@ function app() {
 
 $(function() {
   app().init();
-})
+});
